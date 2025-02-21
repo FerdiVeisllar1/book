@@ -1,0 +1,63 @@
+<app-navbar [isLoggedIn]="true"/>
+
+
+
+<form [formGroup]="userForm" (ngSubmit)="saveChanges()">
+  <div class="container mt-4">
+    <h2 class="mb-3">User Profile</h2>
+        <!-- Tabs for Personal Details & Bookings -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Personal details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="'/bookings/' + userId">Bookings</a>
+          </li>
+        </ul>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Personal details</h5>
+        <p class="text-muted">Update your info and find out how it's used.</p>
+
+        <!-- First Name -->
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4 fw-bold">First Name</div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" formControlName="firstName" [readonly]="!isEditing">
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4 fw-bold">Last Name</div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" formControlName="lastName" [readonly]="!isEditing">
+          </div>
+        </div>
+
+        <!-- Email Address -->
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4 fw-bold">Email Address</div>
+          <div class="col-md-6">
+            <input type="email" class="form-control" formControlName="email" [readonly]="!isEditing">
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4 fw-bold">Phone Number</div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" formControlName="phoneNumber" [readonly]="!isEditing">
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-end">
+          <button type="button" class="btn btn-primary" (click)="enableEdit()" *ngIf="!isEditing">Edit</button>
+          <button type="submit" class="btn btn-success" *ngIf="isEditing">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

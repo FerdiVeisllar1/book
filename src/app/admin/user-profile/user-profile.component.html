@@ -1,0 +1,66 @@
+<app-navbar
+  [isAdmin]="true"
+  [searchQuery]="searchQuery"
+  (searchEvent)="onSearch($event)"
+  [title]="'Manage Users'"
+  [buttonLink]="'new'"
+  [showButton]="false">
+</app-navbar>
+
+<div class="content">
+  <h2 class="text-center fw-bold ">Manage Users</h2>
+  <table class="table table-bordered table-hover" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 10%;">#
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('id')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 15%;">First Name
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('firstName')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 15%;">Last Name
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('lastName')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 25%;">Email
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('email')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 15%;">Phone
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('phoneNumber')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 15%;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; trackBy: trackById">
+        <td>{{ user.id }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <a class="btn btn-outline-warning" [routerLink]="'/profile/' + user.id">View</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      <select #targetValue (change)="onItemsPerPageChange(targetValue.value)" class="form-select w-auto ms-2">
+        <option *ngFor="let option of perPageOptions" [value]="option" [selected]="option === itemsPerPage">{{ option }}</option>
+      </select>
+    </ul>
+  </nav>
+</div>

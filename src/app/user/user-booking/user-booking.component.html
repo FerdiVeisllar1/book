@@ -1,0 +1,38 @@
+<app-navbar [isLoggedIn]="true"/>
+<div class="container mt-5">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'/profile/' + userId">Personal details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Bookings</a>
+    </li>
+  </ul >
+
+  <!-- Search Bar -->
+  <div class="mb-3 mt-3" >
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by room name..."
+      [(ngModel)]="search"
+      (input)="filterBookings()"
+    />
+  </div>
+
+  <!-- Booking List -->
+  <div *ngIf="filteredBookings.length > 0; else noBookings">
+    <div class="card p-3 shadow mb-3" *ngFor="let booking of filteredBookings; trackBy: trackById">
+      <h3 class="card-title">Room: {{ booking.room?.name || 'N/A' }}</h3>
+      <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+      <p><strong>Check-in:</strong> {{ booking.bookFrom }}</p>
+      <p><strong>Check-out:</strong> {{ booking.bookTo }}</p>
+      <p><strong>Price:</strong> {{ booking.room?.price | currency: 'USD' }}</p>
+    </div>
+  </div>
+
+  <!-- No Bookings Found -->
+  <ng-template #noBookings>
+    <p class="text-center text-muted">You have no bookings yet.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,47 @@
+/* Title Styling */
+.title-text {
+  font-family: "Garamond", serif;
+  font-size: 2rem;
+  color: #333;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Room Cards */
+.room-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+}
+
+.room-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Room Image */
+.room-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Pagination Alignment */
+.pagination {
+  margin-top: 20px;
+}
+
+/* Buttons */
+.btn-outline-warning {
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  border-radius: 20px;
+  font-weight: bold;
+}
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center; /* Centers the content */
+}

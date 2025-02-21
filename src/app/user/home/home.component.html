@@ -1,0 +1,328 @@
+<body>
+  <nav class="navbar  shadow-sm fixed-top" [ngClass]="{'hidden-navbar': isHidden}">
+    <a class="navbar-brand fw-bold d-flex align-items-center">BestFinder
+      <img src="logo.png" alt="Luxury Hotels Network" class="logo me-2" style="height: 30px;">
+    </a>
+    <div class="nav-links">
+      <a routerLink="/" class="mx-3">Home</a>
+      <a routerLink="/guesthouses" class="mx-3">Guesthouses</a>
+      <a routerLink="/login" class="mx-3">Log In</a>
+      <a routerLink="/contact" class="mx-3">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Dynamic Background -->
+<div>
+    <div class="hero-section d-flex align-items-center justify-content-center text-center"
+    [ngStyle]="{'background-image': 'url(' + selectedBackground + ')'}"
+    style="background-size: cover; background-position: center; transition: background 0.3s ease-in-out; min-height: 500px;">
+
+   <div class="container text-white" style="margin-bottom: 50px;">
+       <h1 class="display-3 fw-bold">Hello. Salut. Hola</h1>
+       <p class="lead">Resorts remain stylish, modern, forward-thinking global leaders in hospitality.</p>
+       <button class="btn btn-outline-light btn-lg">More Info</button>
+   </div>
+   <div class="container">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()"
+          class="d-flex flex-column gap-3 p-4 rounded shadow-lg"
+          style="margin-top: 100vh; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); border-radius: 12px;">
+      <div class="row">
+        <div class="col-md-3">
+          <label class="text-white fw-semibold">Check-In Date:</label>
+          <input type="date" formControlName="checkIn" class="form-control rounded-pill border-0" />
+        </div>
+        <div class="col-md-3">
+          <label class="text-white fw-semibold">Check-Out Date:</label>
+          <input type="date" formControlName="checkOut" class="form-control rounded-pill border-0" />
+        </div>
+        <div class="col-md-3">
+          <label class="text-white fw-semibold">Number of Beds:</label>
+          <input type="number" formControlName="numberOfBeds" min="1" class="form-control rounded-pill border-0" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+          <button type="submit" class="btn btn-info w-100 rounded-pill fw-bold">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+ <!-- Search Section Below -->
+
+
+      <!-- Gallery Images -->
+      <div class="gallery">
+          <img src="Bcity.jpg" alt="Gallery Image" (click)="setBackground('/Bcity.jpg')">
+          <img src="cool.jpg" alt="Gallery Image" (click)="setBackground('/cool.jpg')">
+          <img src="osaka.jpg" alt="Gallery Image" (click)="setBackground('/osaka.jpg')">
+      </div>
+
+
+</div>
+  <section class="welcome-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Image Section -->
+            <div class="col-lg-6">
+                <div class="image-container">
+                    <div class="main-image">
+                        <img src="Bcity.jpg" class="img-fluid rounded shadow-lg" alt="Popular Travel Destination">
+                    </div>
+                    <div class="overlay-image">
+                        <img src="Hrooms/Hotel1.jpg" class="img-fluid rounded shadow-lg" alt="Luxurious Hotel Room">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Section -->
+            <div class="col-lg-6 text-start">
+                <h2 class="display-4 fw-bold text-dark">Welcome to <span class="text-primary">BestFinder</span></h2>
+                <p class="lead text-muted">
+                    Your ultimate platform for discovering and booking the best hotels at unbeatable prices. Whether you're looking for a luxurious beachfront resort, a cozy city retreat, or a budget-friendly stay, we've got you covered.
+                </p>
+                <p class="text-muted">
+                    With a seamless booking experience, verified guest reviews, and exclusive deals, finding your perfect accommodation has never been easier. Explore thousands of options and book with confidence today.
+                </p>
+                <a href="#" class="btn btn-primary btn-lg mt-3">Start Exploring</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="amenities-section" style="background: url('beach.jpg') center/cover no-repeat; width: 1350px; height: 500px; margin-top: 200px; margin-left: auto; position: relative; margin-right: auto;">
+  <div class="amenities-container" style="height: 600px; margin-left: 20vh;margin-bottom: 50px;">
+      <div class="amenities-text">
+          <h2>Explore Our Guesthouse & Room Amenities</h2>
+          <p>
+              Whether you're booking a cozy guesthouse, a luxury suite, or a budget-friendly stay, we ensure every accommodation offers top-tier comfort and convenience. From high-speed WiFi to premium bedding, find the perfect place tailored to your needs.
+          </p>
+          <div class="amenities-list">
+              <div><i class="bi bi-wifi"></i> Free High-Speed WiFi</div>
+              <div><i class="bi bi-tv"></i> Smart TV with Streaming</div>
+              <div><i class="bi bi-snow"></i> Air Conditioning & Heating</div>
+              <div><i class="bi bi-cup-hot"></i> Complimentary Breakfast</div>
+              <div><i class="bi bi-house-door"></i> Private Balconies & Cozy Living Spaces</div>
+              <div><i class="bi bi-bag"></i> Fully Equipped Kitchenettes</div>
+              <div><i class="bi bi-heart-fill"></i> Pet-Friendly Stays</div>
+              <div><i class="bi bi-geo-alt"></i> Prime Locations Near Attractions</div>
+              <div><i class="bi bi-key-fill"></i> Secure & Contactless Check-in</div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- Rooms & Suites Section -->
+<section class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mt-5" >
+    <h2 class="mb-4">Guesthouses & Rooms</h2>
+    <a class="btn btn-outline-secondary" routerLink="guesthouses">View all</a>
+  </div>
+
+  <div id="guesthouseCarousel" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-inner">
+      <ng-container *ngFor="let chunk of chunkedGuesthouses; let i = index">
+        <div class="carousel-item" [class.active]="i === 0">
+          <div class="row justify-content-center">
+            <div class="col-md-4" *ngFor="let guesthouse of chunk">
+              <div class="card">
+                <img [src]="getRandomImage(guesthouse.id)" class="card-img-top guesthouse-img" alt="Guesthouse Image">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{ guesthouse.name }}</h5>
+                  <p class="text-muted">{{ guesthouse.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Carousel Controls -->
+ <!-- Left Arrow -->
+<button class="carousel-control-prev" type="button" data-bs-target="#guesthouseCarousel" data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</button>
+
+<!-- Right Arrow -->
+<button class="carousel-control-next" type="button" data-bs-target="#guesthouseCarousel" data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</button>
+  </div>
+</section>
+
+
+
+
+<!-- Testimonials Section -->
+<section class="testimonial-section bg-primary text-white py-5 mt-4">
+  <div class="container">
+      <h2 class="fw-bold text-center mb-5">What Our Guests Say</h2>
+      <div class="row g-4">
+          <!-- Testimonial 1 -->
+          <div class="col-md-4">
+              <div class="testimonial-card text-center p-4 rounded shadow-lg">
+                  <img src="Joshua.jpg" class="testimonial-img mb-3" alt="Ardit Zhebrea">
+                  <p class="fst-italic">"A seamless booking experience! Found the perfect stay with ease. Highly recommended!"</p>
+                  <p class="fw-bold">- Joshua Hubbard</p>
+              </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="col-md-4">
+              <div class="testimonial-card text-center p-4 rounded shadow-lg">
+                  <img src="Elena.jpg" class="testimonial-img mb-3" alt="Elena Marku">
+                  <p class="fst-italic">"The guesthouse was spotless, cozy, and in a prime location. Couldn't have asked for better!"</p>
+                  <p class="fw-bold">- Elena Marku</p>
+              </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="col-md-4">
+              <div class="testimonial-card text-center p-4 rounded shadow-lg">
+                  <img src="Leka.jpg" class="testimonial-img mb-3" alt="David Leka">
+                  <p class="fst-italic">"Outstanding service and top-tier amenities. Will definitely book again!"</p>
+                  <p class="fw-bold">- David Leka</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- Restaurant Section -->
+
+
+<!-- Photo Gallery -->
+<section class="container my-5">
+  <p class="text-uppercase text-muted text-center">Welcome to Our Photo Gallery</p>
+  <h2 class="text-center fw-bold">Photo Gallery of Our Rooms</h2>
+
+  <!-- Bootstrap Carousel -->
+  <div id="photoGalleryCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel7.jpg" class="gallery-img">
+          </div>
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel5.jpg" class="gallery-img">
+          </div>
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel4.jpg" class="gallery-img">
+          </div>
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel3.jpg" class="gallery-img">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel1.jpg" class="gallery-img">
+          </div>
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel2.jpg" class="gallery-img">
+          </div>
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel6.jpg" class="gallery-img">
+          </div>
+          <div class="col-md-3">
+            <img src="/Hrooms/Hotel8.jpg" class="gallery-img">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#photoGalleryCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#photoGalleryCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+
+</section>
+
+<!-- Google Map Section -->
+<section class="container-fluid">
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18..."
+  width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+</iframe>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-light py-5 mt-5">
+  <div class="container">
+    <div class="row gy-4">
+
+      <!-- Logo & Info -->
+      <div class="col-md-3">
+        <img src="/logo.png" alt="Luxury Hotels Network" class="logo mb-3" style="height: 80px;">
+        <p class="text-muted small">All hotels and vacation rental properties listed on this website are independently owned and operated.</p>
+        <p class="fw-semibold">Accepted payment methods:</p>
+        <div class="d-flex gap-2">
+          <img src="assets/paypal.png" alt="PayPal" width="40">
+          <img src="assets/visa.png" alt="Visa" width="40">
+          <img src="assets/stripe.png" alt="Stripe" width="40">
+          <img src="assets/mastercard.png" alt="MasterCard" width="40">
+        </div>
+      </div>
+
+      <!-- For Customers -->
+      <div class="col-md-3">
+        <h5 class="fw-bold">For Customers</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link"><i class="bi bi-chevron-right"></i> About Luviana</a></li>
+          <li><a href="#" class="footer-link"><i class="bi bi-chevron-right"></i> Customer Care/Help</a></li>
+          <li><a href="#" class="footer-link"><i class="bi bi-chevron-right"></i> Corporate Accounts</a></li>
+          <li><a href="#" class="footer-link"><i class="bi bi-chevron-right"></i> Financial Information</a></li>
+          <li><a href="#" class="footer-link"><i class="bi bi-chevron-right"></i> Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Recent News -->
+      <div class="col-md-3">
+        <h5 class="fw-bold">Recent News</h5>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-leaf text-success"></i> Our Secret Island Boat Tour</li>
+          <li><i class="bi bi-leaf text-success"></i> Chill and Escape in Natural Shelters</li>
+          <li><i class="bi bi-leaf text-success"></i> September in Luviana Hotel</li>
+          <li><i class="bi bi-leaf text-success"></i> Live Music Concerts at Luviana</li>
+        </ul>
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-md-3">
+        <h5 class="fw-bold">Contact Us</h5>
+        <p class="small"><i class="bi bi-geo-alt-fill"></i> 3015 Grand Ave, Coconut Grove, FL</p>
+        <p class="small"><i class="bi bi-envelope-fill"></i> hello&#64;luviana.com</p>
+        <p class="small"><i class="bi bi-telephone-fill"></i> +1 954 456 6789</p>
+        <p class="small"><i class="bi bi-printer-fill"></i> +1 954 456 6788</p>
+        <p class="small"><i class="bi bi-headset"></i> 24/7 Customer Service</p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="#"><i class="bi bi-facebook social-icon"></i></a>
+          <a href="#"><i class="bi bi-twitter social-icon"></i></a>
+          <a href="#"><i class="bi bi-instagram social-icon"></i></a>
+          <a href="#"><i class="bi bi-youtube social-icon"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copyright & Links -->
+    <div class="text-center mt-4 border-top pt-3">
+      <p class="mb-1 text-muted small">Luviana &copy; 2025 All Rights Reserved</p>
+      <p>
+        <a href="#" class="footer-link">About</a> /
+        <a href="#" class="footer-link">Terms & Conditions</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+

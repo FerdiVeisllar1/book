@@ -1,0 +1,134 @@
+<ng-container *ngIf="isAdmin; else guestNavbar">
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header" style="padding-left: 10px;">
+      <h5>Admin Dashboard</h5>
+    </div>
+    <div class="sidebar-body" style="padding-left: 10px;">
+      <p class="section-title">Room Management</p>
+      <a class="nav-item" routerLink="/rooms">
+        <i class="bi bi-door-open"></i> Rooms
+      </a>
+      <a class="nav-item" routerLink="/profile">
+        <i class="bi bi-people"></i> Users
+      </a>
+      <div class="logout" style="padding-right: 5px;">
+        <a class="nav-item logout-btn" routerLink="">
+          <i class="bi bi-box-arrow-left"></i> Logout
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Admin Navbar -->
+  <nav class="navbar custom-navbar">
+    <div class="container-fluid">
+      <!-- Page Title & Button -->
+      <div class="d-flex align-items-center">
+        <span class="navbar-title">{{ title }}</span>
+        <a *ngIf="showButton" class="btn btn-success ms-3" [routerLink]="buttonLink">{{ buttonText }}</a>
+      </div>
+
+      <!-- Search & Profile -->
+      <div class="d-flex align-items-center">
+        <form class="d-flex search-form" role="search" (submit)="onSearch(); $event.preventDefault()">
+          <input type="text" class="form-control me-2" placeholder="Search" [(ngModel)]="searchQuery" name="search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
+        <!-- Profile Icon -->
+        <div class="dropdown ms-3">
+          <img src="Admin.png" class="rounded-circle dropdown-toggle profile-pic" width="45" height="45" data-bs-toggle="dropdown" aria-expanded="false">
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</ng-container>
+  <!-- Sidebar -->
+
+<!-- Guest Navbar -->
+<!-- Guest Navbar -->
+<ng-template #guestNavbar>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg py-3 w-100">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand fw-bold d-flex align-items-center">
+        <img src="logo.png" alt="Luxury Hotels Network" class="logo me-2" style="height: 40px;">
+        BestFinder
+      </a>
+
+      <!-- Toggler Button for Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- Rooms Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="roomsDropdown" role="button" data-bs-toggle="dropdown">
+              Rooms & Suites
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">Luxury Suite</a></li>
+              <li><a class="dropdown-item" href="#">Deluxe Room</a></li>
+            </ul>
+          </li>
+
+          <!-- Login Dropdown -->
+          <li class="nav-item dropdown" *ngIf="isLoggedIn" >
+            <a class="nav-link dropdown-toggle" routerLink="/login" id="newsDropdown" role="button" data-bs-toggle="dropdown">
+              Log out
+            </a>
+            <li class="nav-item dropdown" *ngIf="!isLoggedIn" >
+              <a class="nav-link dropdown-toggle" routerLink="/login" id="newsDropdown" role="button" data-bs-toggle="dropdown">
+                Log in
+              </a>
+
+          </li>
+
+          <!-- Pages Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown">
+              Pages
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">About Us</a></li>
+              <li><a class="dropdown-item" href="#">Contact</a></li>
+            </ul>
+          </li>
+
+          <!-- Currency Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" role="button" data-bs-toggle="dropdown">
+              USD
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">EUR</a></li>
+              <li><a class="dropdown-item" href="#">GBP</a></li>
+            </ul>
+          </li>
+
+          <!-- Instagram Icon -->
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-instagram fs-5"></i></a>
+          </li>
+
+          <!-- Profile Icon (Only When Logged In) -->
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <img src="User.jpg" class="rounded-circle border border-light ms-2" width="40" height="40" alt="Profile" [routerLink]="'/profile/:'+ userId">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</ng-template>
+

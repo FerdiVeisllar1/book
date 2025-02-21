@@ -1,0 +1,13 @@
+.card {
+  border-radius: 10px;
+  border: none;
+}
+
+.card-title {
+  color: #333;
+}
+
+input.form-control {
+  border-radius: 20px;
+  padding: 10px;
+}

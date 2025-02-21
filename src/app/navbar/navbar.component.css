@@ -1,0 +1,130 @@
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0; /* Ensures it starts at the very top */
+  left: 0;
+  width: 250px;
+  height: 100vh; /* Full height */
+  background: linear-gradient(135deg, #2a2a72, #009ffd);
+  color: white;
+  padding-top: 20px;
+  z-index: 1050; /* Ensures it appears on top of the navbar */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #cccccc;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+/* Sidebar Navigation Items */
+.nav-item {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.nav-item i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* Hover Effect */
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Active Link */
+.nav-item.active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Logout Button */
+.logout {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.logout-btn {
+  background: #d9534f;
+  color: white;
+}
+
+.logout-btn:hover {
+  background: #c9302c;
+}
+
+.content {
+  flex-grow: 1;
+  margin-left: 250px;
+
+  overflow-x: auto;
+  width: calc(100% - 250px);
+}
+/* Custom Navbar */
+.custom-navbar {
+  width: calc(100% - 250px); /* Matches sidebar width */
+  margin-left: 250px;
+  background: linear-gradient(135deg, #2a2a72, #009ffd);
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Navbar Title */
+.navbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Search Bar */
+.search-form input {
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.search-form button {
+  border-radius: 20px;
+}
+
+/* Profile Dropdown */
+.profile-pic {
+  cursor: pointer;
+  border: 2px solid white;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+   /* Avoids overlap with sidebar content */
+  width: calc(100% - 250px);
+  height: 60px;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Slightly below the sidebar */
+}

@@ -1,0 +1,49 @@
+/* Ensure the page fills the entire viewport */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Create a flex container for sidebar and content */
+.main-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  margin-left: 250px;
+}
+
+/* Content Styling */
+.content {
+  flex-grow: 1;
+  margin-left: 250px;
+  padding: 20px;
+  overflow-x: auto;
+  width: 100%;
+  min-width: 0; /* Prevents unnecessary stretching */
+}
+
+/* Make table responsive */
+.table-responsive {
+  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  max-width: 70%;
+}
+
+.table {
+  width: 190vh;
+  margin-left: 250px;
+  table-layout: fixed; /* Ensures proper column widths */
+  word-wrap: break-word;
+}
+
+/* Prevent text overflow in table cells */
+.table td,
+.table th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure inputs and other elements remain interactive */

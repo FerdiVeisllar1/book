@@ -1,0 +1,119 @@
+<app-navbar
+  [isAdmin]="true"
+  [searchQuery]="searchQuery"
+  (searchEvent)="onSearch($event)"
+  [title]="'Manage Rooms'"
+  [buttonText]="'New Room'"
+  [buttonLink]="'new'">
+</app-navbar>
+
+
+
+<body>
+  <table class="table table-bordered table-hover w-79" style="margin-right: auto; margin-top: 65px;">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 5%;">
+          #
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('id')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 8%;">
+          Title
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('name')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 10%;">
+          Description
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('description')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 8%;">Image</th>
+        <th scope="col" style="width: 5%;">
+          Beds
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('numberOfBeds')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 7%;">
+          Price/Day
+          <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('price')">
+            ▲▼
+          </button>
+        </th>
+        <th scope="col" style="width: 20%;">Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of sortedRooms | paginate:{ itemsPerPage: itemsPerPage, currentPage: page } ;trackBy: trackById">
+        <td>{{ room.id }}</td>
+        <td>{{ room.name }}</td>
+        <td>{{ room.description }}</td>
+        <td>
+          <img *ngIf="room.image" [src]="'data:image/jpeg;base64,' + room.image" class="img-fluid mb-3" alt="Uploaded Image" width="150px">
+        </td>
+        <td>{{ room.numberOfBeds }}</td>
+        <td>{{ room.price | currency: 'USD'}}</td>
+        <td>
+          <button class="btn btn-outline-secondary" style="margin-right: 10px;">View Details</button>
+          <a class="btn btn-success me-2" style="width: 80px;height: 40px;" [routerLink]="'edit/' + room.id">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+          <button class="btn btn-danger" (click)="openDeleteModal(room)">
+            <i class="bi bi-trash-fill"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <select #targetValue (change)="onItemsPerPageChange(targetValue.value)" class="form-select w-auto ms-2">
+      <option *ngFor="let option of perPageOptions" [value]="option" [selected]="option === itemsPerPage">{{ option }}</option>
+    </select>
+  </ul>
+</nav>
+
+<router-outlet/>
+
+<ng-container *ngIf="modalService.isOpen$ | async">
+  <div class="modal-overlay">
+    <div
+  class="modal fade show d-block"
+  [class.show]="modalService.isOpen$ | async"
+  [style.display]="(modalService.isOpen$ | async) ? 'block' : 'none'"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong>{{ selectedGuesthouse?.name }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="modalService.close()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BACKDROP -->
+<div
+  class="modal-backdrop fade show"
+  *ngIf="modalService.isOpen$ | async"
+  (click)="modalService.close()"
+></div>
+
+

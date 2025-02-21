@@ -1,0 +1,32 @@
+/* Stylish Title */
+.title-text {
+  font-family: "Garamond", serif;
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Guesthouse Cards */
+.guesthouse-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+}
+
+.guesthouse-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Guesthouse Image */
+.guesthouse-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Centered Pagination */
+.pagination {
+  margin-top: 0px;
+}
+

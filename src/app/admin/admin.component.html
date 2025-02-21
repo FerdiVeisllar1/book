@@ -1,0 +1,99 @@
+<app-navbar
+  [isAdmin]="true"
+  [searchQuery]="searchQuery"
+  (searchEvent)="onSearch($event)"
+  [title]="'Manage Guesthouses'"
+  [buttonText]="'New Guesthouse'"
+  [buttonLink]="'create'">
+</app-navbar>
+
+
+
+<table class="table table-bordered table-hover" style="margin-top: 65px;width: 83.5%;">
+  <thead>
+    <tr>
+      <th scope="col " style="width: 5%;">
+        #
+        <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('id')">
+          ▲▼
+        </button>
+      </th>
+      <th scope="col" style="width: 10%;">
+        Name
+        <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('name')">
+          ▲▼
+        </button>
+      </th>
+      <th scope="col" style="width: 20%;">
+        Description
+        <button class="btn btn-sm btn-outline-secondary" (click)="sortTable('description')">
+          ▲▼
+        </button>
+      </th>
+      <th scope="col" style="width: 15%;">Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of sortedGuesthouses | paginate:{ itemsPerPage: itemsPerPage, currentPage: page } ;trackBy: trackById">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.description }}</td>
+      <td>
+        <button class="btn btn-outline-secondary" style="margin-right: 10px;" [routerLink]="'/admin/rooms/' + item.id">View Details</button>
+        <a class="btn btn-success me-2" style="width: 80px;height: 40px;" [routerLink]="'/admin/edit/' + item.id">
+          <i class="bi bi-pencil-square"></i>
+        </a>
+        <button class="btn btn-danger" (click)="openDeleteModal(item)">
+          <i class="bi bi-trash-fill"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<router-outlet/>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <select #targetValue (change)="onItemsPerPageChange(targetValue.value)" class="form-select w-auto ms-2">
+      <option *ngFor="let option of perPageOptions" [value]="option" [selected]="option === itemsPerPage">{{ option }}</option>
+    </select>
+  </ul>
+</nav>
+
+
+<ng-container *ngIf="modalService.isOpen$ | async">
+  <div class="modal-overlay">
+    <div
+  class="modal fade show d-block"
+  [class.show]="modalService.isOpen$ | async"
+  [style.display]="(modalService.isOpen$ | async) ? 'block' : 'none'"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong>{{ selectedGuesthouse?.name }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="modalService.close()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACKDROP -->
+<div
+  class="modal-backdrop fade show"
+  *ngIf="modalService.isOpen$ | async"
+  (click)="modalService.close()"
+></div>

@@ -1,0 +1,29 @@
+<app-navbar/>
+<body style="background-color: gray;" >
+  <div class="container mt-4"  >
+    <h2 class="text-center fw-bold mb-4 title-text" style="margin-top: 40px;">Guesthouse Accommodations</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of filteredGuesthouses | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; trackBy: trackById">
+        <div class="card shadow-lg border-0 guesthouse-card">
+          <img [src]="getRandomImage(item.id)" class="card-img-top guesthouse-img" alt="Guesthouse Image">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <a class="btn btn-warning w-100 fw-bold text-dark" [routerLink]="'rooms/' + item.id">View Rooms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mb-1">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      <select #targetValue (change)="onItemsPerPageChange(targetValue.value)" class="form-select w-auto ms-2">
+        <option *ngFor="let option of perPageOptions" [value]="option" [selected]="option === itemsPerPage">{{ option }}</option>
+      </select>
+    </ul>
+  </nav>
+  </body>
+

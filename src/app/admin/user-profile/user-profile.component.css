@@ -1,0 +1,29 @@
+/* Make sidebar and content stay in one row */
+.main-container {
+  display: flex;
+  min-height: 100vh; /* Full height */
+}
+
+/* Sidebar should take a fixed width */
+.sidebar {
+  width: 250px; /* Adjust based on your sidebar width */
+  min-height: 100vh;
+  background-color: #1e3a8a; /* Adjust to match your design */
+  position: fixed; /* Keep it fixed on the side */
+  top: 0;
+  left: 0;
+}
+
+/* Content takes the remaining space */
+.content {
+  flex: 1;
+  margin-left: 250px; /* Same as sidebar width */
+  padding: 0;
+  overflow-x: auto; /* Allow scrolling if needed */
+}
+
+/* Make table responsive */
+.table {
+  width: 100%;
+  table-layout: fixed; /* Keeps the table inside the content */
+}
